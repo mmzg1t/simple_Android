@@ -1,9 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ContextActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 新闻标题 -->
+        <TextView
+            android:id="@+id/newsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="新闻标题"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageView
+            android:id="@+id/ima"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/socc"/>
+        <!-- 新闻内容 -->
+        <TextView
+            android:id="@+id/newsContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="详细内容。"
+            android:textSize="16sp"
+            android:textColor="#333333"/>
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

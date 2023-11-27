@@ -1,15 +1,19 @@
 package com.example.soc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +35,8 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     // RecycleView要用到的控件
     RecyclerView recyclerView;
-    private List<String> list;
+    public String[] name = {"爱你没差", "最长的电影", "听妈妈的话"};
+    public static int[] icons = {R.drawable.music0, R.drawable.music1, R.drawable.music2};
     MyAdapter myAdapter;
     Context context;
 
@@ -67,12 +72,13 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));//this.getActivity() 通常用于获取与 Fragment 相关联的 Context
+
         showRecycleView();
 
         return view;
@@ -80,12 +86,7 @@ public class HomeFragment extends Fragment {
 
     private void showRecycleView(){
         context = this.getActivity();
-
-        list = new ArrayList<String>();
-        for (int i = 0; i < 9; i++){
-            list.add("这是第"+i+"条新闻");
-        }
-        myAdapter = new MyAdapter(context,list);
+        myAdapter = new MyAdapter(context,name,icons);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

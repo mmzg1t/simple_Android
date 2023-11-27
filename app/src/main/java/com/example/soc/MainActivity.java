@@ -1,6 +1,8 @@
 package com.example.soc;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,7 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,8 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Fragment dataFragment = new DataFragment();
     Fragment starFragment = new StarFragment();
     Fragment meFragment = new MeFragment();
-
-
+    private MyReceiver2 myReceiver2;
+    //String actionname="666";
+    //Intent intent=new Intent(actionname);
     // Fragment初始化函数
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -56,7 +62,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 初始化Fragment
         initFragment();
         selectTab(1);
+        String[] permissions={Manifest.permission.RECEIVE_SMS};
+        int requestCode=999;
+        ActivityCompat.requestPermissions(this,permissions,requestCode);
+    }
 
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 999) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 用户授予了短信权限，可以执行读取短信的操作
+                // 执行读取短信的逻辑...
+            } else {
+                // 用户拒绝了短信权限，你可以根据需要进行适当的处理
+            }
+        }
     }
 
     public void initFragment(){
